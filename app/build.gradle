@@ -60,6 +60,6 @@ dependencies {
 String getApiKey() {
     def propFile = rootProject.file("./local.properties")
     def properties = new Properties()
-    properties.load(new FileInputStream(propFile))
+    if (propFile.canRead()) properties.load(new FileInputStream(propFile))
     return properties['BASE_URL']
 }
