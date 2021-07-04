@@ -17,18 +17,16 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'adopt'
-
+        distribution: 'adopt'    
+   - name: Access BASE_URL
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+      run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Access BASE_URL
-      env:
-        BASE_URL: ${{ secrets.BASE_URL }}
-    - run: touch local.properties
-    - run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
-    - run: cat local.properties
+ 
 
 
