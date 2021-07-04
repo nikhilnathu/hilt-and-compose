@@ -47,7 +47,11 @@ buildscript {
                 "com.google.dagger:hilt-android:$hilt_version",
 
                 //Retrofit
-                "com.squareup.retrofit2:retrofit:$retrofit_version"
+                "com.squareup.retrofit2:retrofit:$retrofit_version",
+                "com.squareup.retrofit2:converter-gson:$retrofit_gson_version",
+                'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
+
         ]
 
         kaptLibraries = [
