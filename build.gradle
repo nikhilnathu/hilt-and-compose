@@ -1,18 +1,93 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.32"
-    ext.hilt_version = '2.35'
+
+    ext {
+        //Globals
+        kotlin_version = '1.5.20'
+        hilt_version = '2.37'
+        navigation_version = '2.3.5'
+
+        //Locals
+        def androidxcore_version = '1.6.0'
+        def appcompat_version = '1.3.0'
+        def material_version = '1.4.0'
+        def constraint_layout_version = '2.0.4'
+        def livedata_version = '2.3.1'
+        def espresso_version = '3.4.0'
+        def retrofit_version = '2.9.0'
+        def retrofit_gson_version = '2.9.0'
+        def truth_version = '1.1.3'
+        def junit5_version = '5.7.1'
+        def junit4_version = '4.13.2'
+        def junit4_ext_version = '1.1.3'
+        def mockk_version = '1.12.0'
+        def coroutines_test_version = '1.5.0'
+        def core_test_version = '2.1.0'
+
+
+        libraries = [
+                "androidx.core:core-ktx:$androidxcore_version",\
+
+            //Androidx
+                "androidx.appcompat:appcompat:$appcompat_version",
+                "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
+
+                //Material design
+                "com.google.android.material:material:$material_version",
+
+                //Lifecycle
+                "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version",
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:$livedata_version",
+
+                //Naivgation
+                "androidx.navigation:navigation-fragment-ktx:$navigation_version",
+                "androidx.navigation:navigation-ui-ktx:$navigation_version",
+
+                //Hilt
+                "com.google.dagger:hilt-android:$hilt_version",
+
+                //Retrofit
+                "com.squareup.retrofit2:retrofit:$retrofit_version"
+        ]
+
+        kaptLibraries = [
+                "com.google.dagger:hilt-compiler:$hilt_version"
+        ]
+
+        testLibraries = [
+                "org.junit.jupiter:junit-jupiter-api:$junit5_version",
+                "org.junit.jupiter:junit-jupiter-params:$junit5_version",
+                "com.google.truth:truth:$truth_version",
+                "io.mockk:mockk:$mockk_version",
+                "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version",
+                "androidx.arch.core:core-testing:$core_test_version",
+                "junit:junit:$junit4_version"
+        ]
+
+        kaptTestLibraries = [
+                "com.google.dagger:hilt-android-compiler:$hilt_version"
+        ]
+
+        runtimeTestLibraries = [
+                "org.junit.jupiter:junit-jupiter-engine:$junit5_version"
+        ]
+
+        androidTestLibraries = [
+                "androidx.test.ext:junit:$junit4_ext_version",
+                "androidx.test.espresso:espresso-core:$espresso_version"
+        ]
+    }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
-        classpath "de.mannodermaus.gradle.plugins:android-junit5:1.3.2.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath"de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,7 +97,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
