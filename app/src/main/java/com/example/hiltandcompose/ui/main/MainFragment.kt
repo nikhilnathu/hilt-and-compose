@@ -6,25 +6,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import com.example.hiltandcompose.MainActivity
 import com.example.hiltandcompose.R
+import com.example.hiltandcompose.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
+    private val viewModel by viewModels<MainViewModel>()
+    @Inject lateinit var string : String
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
+        val binding = DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container, false)
+        binding.lifecycleOwner = this
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
+        viewModel.stuff.observe(viewLifecycleOwner) {
+            binding.message.text = it.toString()
+        }
+
+        binding.button.setOnClickListener {
+
+        }
+
+        return binding.root
+    }
 }
