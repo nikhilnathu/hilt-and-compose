@@ -14,6 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.e("main", "onCreate: ${BuildConfig.API_KEY}")
+        Log.e("main", "onCreate: ${BuildConfig.BASE_URL}")
     }
 }
