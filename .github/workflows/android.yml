@@ -18,7 +18,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'    
-   - name: Access BASE_URL
+    - name: Access BASE_URL
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
       run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
