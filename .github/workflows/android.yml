@@ -12,16 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK 11
-          uses: actions/setup-java@v2
-          with:
-            java-version: '11'
-            distribution: 'adopt'    
-        - name: Access BASE_URL
-          env:
-            BASE_URL: ${{ secrets.BASE_URL }}
-          run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
-        - name: Grant execute permission for gradlew
-          run: chmod +x gradlew
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'    
+      - name: Access BASE_URL
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+        run: echo BASE_URL=\"$BASE_URL\" > ./local.properties
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
 
