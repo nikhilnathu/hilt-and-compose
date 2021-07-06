@@ -5,6 +5,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
     id 'de.mannodermaus.android-junit5'
+    id 'org.jlleitschuh.gradle.ktlint'
 }
 
 android {
@@ -22,7 +23,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", getApiKey()
+            buildConfigField "String", "BASE_URL", getBaseUrl()
             buildConfigField "int", "FOO", "42"
         }
 
@@ -42,12 +43,13 @@ android {
         dataBinding true
     }
 
-    hilt {
-        enableTransformForLocalTests = true
-    }
-
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+
+    ktlint {
+        android.set(true)
+        outputColorName.set("RED")
     }
 }
 
@@ -65,7 +67,7 @@ dependencies {
     kaptTest kaptTestLibraries
 }
 
-String getApiKey() {
+String getBaseUrl() {
     def propFile = rootProject.file("./local.properties")
     def properties = new Properties()
     if (propFile.canRead()) properties.load(new FileInputStream(propFile))

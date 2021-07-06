@@ -6,7 +6,10 @@ import com.example.hiltandcompose.utils.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,7 +22,7 @@ class MainViewModelTest {
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
     private val testCoroutineScope = TestCoroutineScope(testCoroutineDispatcher)
 
-    lateinit var viewModel : MainViewModel
+    lateinit var viewModel: MainViewModel
 
     @BeforeEach
     fun setup() {
@@ -38,4 +41,3 @@ class MainViewModelTest {
         assertThat(viewModel.pokemon.getOrAwaitValue()).isEqualTo("pikachu")
     }
 }
-
