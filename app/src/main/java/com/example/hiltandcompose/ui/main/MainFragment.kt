@@ -1,6 +1,5 @@
 package com.example.hiltandcompose.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import com.example.hiltandcompose.MainActivity
 import com.example.hiltandcompose.R
 import com.example.hiltandcompose.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.awaitResponse
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -27,12 +24,12 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        viewModel.pokmon.observe(viewLifecycleOwner) {
+        viewModel.pokemon.observe(viewLifecycleOwner) {
             binding.message.text = it
         }
 
         binding.button.setOnClickListener {
-            viewModel.getPokemon("ditto")
+            viewModel.getPokemon("wqioeuw")
         }
 
         return binding.root

@@ -1,5 +1,6 @@
 package com.example.hiltandcompose.di
 
+import android.util.Log
 import com.example.hiltandcompose.BuildConfig
 import com.example.hiltandcompose.api.PokemonApi
 import dagger.Module
@@ -16,9 +17,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    var retrofit = Retrofit.Builder()
+    val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor { chain ->
+            val request = chain.request()
+            val response = chain.proceed(request)
+            when(response.code()) {
+                404 -> Log.e("ERROR", "Error logging. Not so great at the moment")
+            }
+            response
+        }
+        .build()
+
+    private var retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
-        .client(OkHttpClient())
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()

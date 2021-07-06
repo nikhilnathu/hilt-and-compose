@@ -16,26 +16,20 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
     private val _pokemon = MutableLiveData<String>()
-    val pokmon = _pokemon.switchMap { repository.getPokemon(it) }
+    val pokemon = _pokemon.switchMap { getPokemonName(it) }
 
-    fun getPokemon(pokemon : String) {
+    fun getPokemon(pokemon: String) {
         _pokemon.value = pokemon
     }
 
-
-
+    fun getPokemonName(name: String) = liveData {
+        emit(repository.getPokemon(name)?.name)
+    }
 }
 
 
-
 class MainRepository @Inject constructor(private val pokemonApi: PokemonApi) {
-    private suspend fun getData() = listOf(1,2,3,4,5,6,7,8)
-
-    fun getPokemon(pokemon : String) = liveData {
-        val name = pokemonApi.getPokemon(pokemon).awaitResponse().body()?.name
-        emit(name)
-    }
-
+    suspend fun getPokemon(pokemon: String) = pokemonApi.getPokemon(pokemon).body()
 }
 
 

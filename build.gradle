@@ -61,6 +61,7 @@ buildscript {
         testLibraries = [
                 "org.junit.jupiter:junit-jupiter-api:$junit5_version",
                 "org.junit.jupiter:junit-jupiter-params:$junit5_version",
+                "com.google.dagger:hilt-android-testing:$hilt_version",
                 "com.google.truth:truth:$truth_version",
                 "io.mockk:mockk:$mockk_version",
                 "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version",

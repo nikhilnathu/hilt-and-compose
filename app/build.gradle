@@ -41,6 +41,14 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    hilt {
+        enableTransformForLocalTests = true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
